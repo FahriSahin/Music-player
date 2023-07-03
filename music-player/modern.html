@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music APP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .box{
+            width: 350px;
+            height: 500px;
+            background-color:#ececec ;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            margin: calc(50vh - 225px) auto;
+        }
+        .card-header{
+            background-color:#ececec ;
+            height:60px;
+            border: 0px;
+        }
+        h5,p{
+            width: 100%;
+            text-align: center;
+        }
+        .sureBar{
+            width: 0; 
+            height: 7px;
+            border-radius: 5px;
+            background-color:blue;
+        }
+        .sure{
+            display: flex;
+            justify-content: space-between;
+        }
+        .oynat{
+            display: flex;
+            justify-content: space-evenly;
+            height: 40px;
+        }
+        .musicResim{
+            width: 100%;
+            height: 200px;
+            margin-bottom: 35px;
+        }
+        .musicResim img{
+            width: 100%;
+            height: 100%;
+        }
+        .musicAd{
+            height: 70px;
+            margin-bottom: 25px;
+            border-bottom: .5px solid  #8a8a8a;
+        }
+        .sureVeOynat{
+            height: 80px;
+            width: 80%;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+        .ilerigeri{
+            height: 40px;
+            width: 40px;
+            background-color:#007cb9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .ilerigeri:hover{
+            opacity: .7;
+            transition: all .4s;
+        }
+        i{
+            color: #fff;
+        }
+        .sesVeDrop{
+            width: 100%;
+            height: 70px;
+            border-top: .5px solid  #8a8a8a;
+            display: flex;
+            justify-content: space-between;
+        }
+        .sesBar{
+            width: 70px;
+            height: 7px;
+        }
+        .sesBar input{
+            width: 70px;
+            height: 7px;
+            display: flex;
+            align-items: center;
+        }
+        .ses{
+            width: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .akordiyon{
+            width: 100%;
+        }
+        .dropflex{
+            display: flex;
+            justify-content: space-between;
+        }
+        .akordiyon-song-list{
+            display: flex;
+            justify-content: space-between;
+            border: 1px 0px solid gray;
+            padding: 12.5px;
+        }
+
+        .card-body{
+            padding: 20px 5px;
+        }
+        .akordiyon_sure{
+            width: 45px;
+            height: 25px;
+            border-radius: 40%;
+            color: #fff;
+            text-align: center;
+        }
+        .active{
+            background-color: #0092ca;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+        <div class="box">
+            <div class="musicResim">
+                
+            </div>
+            <div class="musicAd">
+                <h5></h5>
+                <p></p>
+            </div>
+            <div class="audio"></div>
+            <div class="sureVeOynat">
+                <div class="sureBar"></div>
+                <div class="sure">
+                    <div class="sureilk">0.00</div>
+                    <div class="sureson"></div>
+                </div>
+                <div class="oynat">
+                    <div class="ilerigeri" id="geri"><i class="fa-solid fa-backward-fast fa-lg"></i></div>
+                    <div class="ilerigeri" id="oynat" ><i class="fa-solid fa-circle-play fa-lg"></i></div>
+                    <div class="ilerigeri" id="durdur" ><i class="fa-solid fa-pause fa-lg"></i></div>
+                    <div class="ilerigeri" id="ileri"><i class="fa-solid fa-forward-fast fa-lg"></i></div>
+                </div>
+            </div>
+            <div class="sesVeDrop">
+                <div id="accordion" class="akordiyon">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <div class="dropflex">
+                            <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="fa-solid fa-bars"></i>
+                              </button>
+                            <div class="ses">
+                                <i class="fa-solid fa-volume-high fa-lg" style="color: rgb(89, 89, 89);"></i>
+                                <div class="sesBar">
+                                    <form action="">
+                                        <input type="range" min="0" max="100" step="2">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                    
+                 
+            </div>
+        </div>
+
+
+
+<script>
+    //sarki const
+    function Sarki(ad,yazar,resim,muzik,muzikIndex,sure){
+        this.ad = ad;
+        this.yazar = yazar;
+        this.resim = resim;
+        this.muzik = muzik;
+        this.muzikIndex = muzikIndex;
+        this.sure = sure;
+    }
+   
+    //sarkilar obj
+    let sarkilar = [
+        new Sarki("Bu Da Geçer Mi Sevgilim","Yalın","yalin.jpeg","1.mp3",0,3.21),
+        new Sarki("Firuze","Sezen Aksu","sezenaksu.jpeg","2.mp3",1,5.05),
+        new Sarki("Şarkılar Sokaklara Ait","Uzi","uzi.jpeg","3.mp3",2,3.16),
+        new Sarki("Öp","Tarkan","tarkan.jpeg","4.mp3",3,4.31),
+    ]
+
+    //sarkiların dropdowna eklenmesi
+    for (let sarki of sarkilar) {
+        let muzik_ekle = `
+        <div class="akordiyon-song-list">
+            <div class="akrodiyon_ad">
+                <b>${sarki.ad} </b> - ${sarki.yazar}
+            </div>
+             <div class="akordiyon_sure bg-primary">
+                ${sarki.sure}
+            </div>
+        </div>
+    `;
+    document.querySelector(".card-body").insertAdjacentHTML("beforeend",muzik_ekle);   
+    }
+
+    //degiskenlerin tanımlanmasi
+    let ekrandakiIndex = 0;
+    let sarkiAdet = sarkilar.length;
+    const muzikAd = document.querySelector(".musicAd h5");
+    const yazarAd = document.querySelector(".musicAd p");
+    const muzikResim = document.querySelector(".musicResim");
+    const sureSon = document.querySelector(".sureson");
+    const sureİlk = document.querySelector(".sureilk");
+    const audio = document.querySelector(".audio");
+    const akordiyondaki = document.querySelector(".akordiyon-song-list");
+    const oynat = document.querySelector("#oynat");
+    const ileri = document.querySelector("#ileri");
+    const geri = document.querySelector("#geri");
+    const durdur = document.querySelector("#durdur");
+    const sesAyar = document.querySelector("form input");
+    //baslangıc durumu
+    muzikResim.innerHTML = `<img src="${sarkilar[ekrandakiIndex].resim}" alt="">`
+    muzikAd.innerText = `${sarkilar[ekrandakiIndex].ad}`;
+    yazarAd.innerText = `${sarkilar[ekrandakiIndex].yazar}`
+    sureSon.innerText = `${sarkilar[ekrandakiIndex].sure}`
+    document.querySelectorAll(".akordiyon-song-list")[ekrandakiIndex].classList.add("active")
+
+    //ileri buton
+    let ileriButon = ileri.addEventListener("click",function(){
+        let ekrandakiSarki = document.querySelector("audio");
+        if (ekrandakiIndex == sarkiAdet - 1) {
+            ekrandakiIndex = 0;
+        }
+        else{
+            ekrandakiIndex++;
+        }
+        muzikResim.innerHTML = `<img src="${sarkilar[ekrandakiIndex].resim}" alt="">`;
+        muzikAd.innerText = `${sarkilar[ekrandakiIndex].ad}`;
+        yazarAd.innerText = `${sarkilar[ekrandakiIndex].yazar}`
+        sureSon.innerText = `${sarkilar[ekrandakiIndex].sure}`
+        for (let i = 0; i < sarkiAdet; i++) {
+            document.querySelectorAll(".akordiyon-song-list")[i].classList.remove("active") 
+        }
+        document.querySelectorAll(".akordiyon-song-list")[ekrandakiIndex].classList.add("active");
+        ekrandakiSarki.pause();
+    })
+
+    //geri buton
+    let geriButon = geri.addEventListener("click",function(){
+        let ekrandakiSarki = document.querySelector("audio");
+        if (ekrandakiIndex == 0 ) {
+            ekrandakiIndex = sarkiAdet - 1;
+        }
+        else{
+            ekrandakiIndex--;
+        }
+
+        muzikResim.innerHTML = `<img src="${sarkilar[ekrandakiIndex].resim}" alt="">`;
+        muzikAd.innerText = `${sarkilar[ekrandakiIndex].ad}`;
+        yazarAd.innerText = `${sarkilar[ekrandakiIndex].yazar}`
+        sureSon.innerText = `${sarkilar[ekrandakiIndex].sure}`
+        for (let i = 0; i < sarkiAdet; i++) {
+            document.querySelectorAll(".akordiyon-song-list")[i].classList.remove("active") 
+        }
+        document.querySelectorAll(".akordiyon-song-list")[ekrandakiIndex].classList.add("active");
+        ekrandakiSarki.pause();
+    })
+
+    //müzik oynatma
+    audio.insertAdjacentHTML("beforeend",`<audio src="${sarkilar[0].muzik}"></audio>`);
+
+    oynat.addEventListener("click",function(){
+        document.querySelector("audio").remove();
+        audio.insertAdjacentHTML("beforeend",`<audio src="${sarkilar[ekrandakiIndex].muzik}"></audio>`); 
+        let ekrandakiSarki = document.querySelector("audio");
+        ekrandakiSarki.play();
+        sureİlk.innerText="";
+        sureFonk();
+    })
+
+    //durdurma
+    durdur.addEventListener("click",function(){
+        let ekrandakiSarki = document.querySelector("audio");
+        ekrandakiSarki.pause();
+    })
+
+    //zaman animasyon 0-280
+    let dakika = Math.floor(sarkilar[ekrandakiIndex].sure) 
+    let saniye = sarkilar[ekrandakiIndex].sure - dakika;
+    function sureFonk(){ 
+        let saniyelikArtis =280 / (sarkilar[ekrandakiIndex].sure * 60) ; 
+        let line_width = 0;
+        let a = 0 , b = 0;
+        let counterLine = setInterval(ekleyici,1000);
+        let isClickedİ = false
+            ileri.addEventListener("click",function(){
+                isClickedİ = true
+            })
+        let isClickedG = false
+            geri.addEventListener("click",function(){
+                isClickedG = true
+            })
+        let durKontrol = false
+            durdur.addEventListener("click",function(){
+                durKontrol = true
+            })
+        function ekleyici() {
+            line_width += saniyelikArtis; 
+            document.querySelector(".sureBar").style.width = line_width + "px"; 
+            a+=1;
+            if (a==60) {
+                b+=1;
+                a=0;
+            }
+            sureİlk.innerText = `${b} . ${a}`
+           
+            if(line_width > 275 || isClickedG || isClickedİ ||durKontrol) { 
+                clearInterval(counterLine)
+                document.querySelector(".sureBar").style.width = "0px"
+            }
+        }
+         
+    }
+    
+    //ses ayar
+    sesAyar.addEventListener("input", (e) => {
+        const value = e.target.value
+        let ekrandakiSarki = document.querySelector("audio")
+        ekrandakiSarki.volume = value /100;
+        console.log(sesAyar.value)
+    });
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+<!-- <audio id="myAudio" src="muzikdosyasi.mp3"></audio>
+
+<button onclick="playAudio()">Oynat</button>
+<button onclick="pauseAudio()">Duraklat</button>
+
+<script>
+  var audio = document.getElementById("myAudio");
+
+  function playAudio() {
+    audio.play();
+  }
+
+  function pauseAudio() {
+    audio.pause();
+  }
+</script> -->
